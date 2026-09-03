@@ -1,0 +1,12 @@
+version: 2
+
+sources:
+  - name: jaffle_shop  # dbt内で参照するときのグループ名
+    description: "Jaffle Shopの生データソース"
+    database: my-dbt-sandbox-507210  # お使いのBigQueryのプロジェクトIDに書き換えてください
+    schema: dbt_ayumi         # データセット名（環境に合わせて調整）
+    tables:
+      - name: raw_customers
+        description: "生データの顧客テーブル"
+      - name: raw_orders
+        description: "生データの注文テーブル"

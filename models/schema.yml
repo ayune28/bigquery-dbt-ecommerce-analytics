@@ -13,3 +13,37 @@ models:
           - not_null
       - name: customer_name
         description: "顧客名"
+
+  - name: customer_segments
+    description: >
+      顧客をLTV（累計購入金額）と注文回数に基づいてセグメント分類したテーブル。
+      リピート施策やターゲティング広告の対象抽出に使用する想定。
+    columns:
+      - name: customer_id
+        description: "顧客の一意識別子"
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_segment
+        description: "顧客ランク（VIP／優良顧客／新規・一般／未購入）"
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['VIP', '優良顧客', '新規・一般', '未購入']
+
+  - name: monthly_sales_summary
+    description: >
+      月ごとの注文件数・購入者数・売上合計・平均客単価を集計したテーブル。
+      経営ダッシュボードやレポーティングに使用する想定。
+    columns:
+      - name: sales_month
+        description: "集計対象の月（月初日で表現）"
+        tests:
+          - unique
+          - not_null
+
+      - name: total_sales_dollars
+        description: "その月の売上合計金額（ドル）"
+        tests:
+          - not_null

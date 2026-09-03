@@ -1,9 +1,10 @@
 {{
     config(
-        materialized='incremental',
-        unique_key='order_id'
+        materialized='table'
     )
 }}
+        -- 本来はincrementalで運用する想定。以下参照↓
+        -- materialized='incremental', unique_key='order_id'
 
 select
     order_id,

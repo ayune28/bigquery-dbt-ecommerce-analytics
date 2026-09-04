@@ -1,3 +1,5 @@
+--列名を整えた顧客データ
+
 select
     id as customer_id,
     name as customer_name

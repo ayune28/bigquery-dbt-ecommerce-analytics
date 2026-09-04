@@ -1,5 +1,4 @@
--- models/staging/stg_orders.sql
--- 注文データのステージングモデル
+--列名を整え、金額をドル換算した注文データ
 
 select
     id as order_id,

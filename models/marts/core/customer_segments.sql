@@ -1,8 +1,15 @@
 -- models/marts/core/customer_segments.sql
--- 顧客をLTV（生涯価値）で分類し、リピート施策のターゲティングに使うモデル
+-- 顧客をLTV（累計購入額）で分類し、施策のターゲティングに使うモデル
+--
+-- 分類基準:
+--   VIP     : lifetime_value 300ドル以上
+--   優良顧客 : lifetime_value 100ドル以上
+--   未購入   : number_of_orders 0回
+--   新規・一般: 上記以外
 
 with customers as (
 
+    -- 顧客ごとの注文回数・累計購入額（dim_customersで集計済み）
     select * from {{ ref('dim_customers') }}
 
 ),
@@ -15,6 +22,8 @@ final as (
         number_of_orders,
         lifetime_value,
 
+        -- lifetime_valueを基準に4段階へランク分け
+        -- 上から順に判定し、最初に当てはまったものが採用される
         case
             when lifetime_value >= 300 then 'VIP'
             when lifetime_value >= 100 then '優良顧客'

@@ -25,8 +25,8 @@ final as (
         -- lifetime_valueを基準に4段階へランク分け
         -- 上から順に判定し、最初に当てはまったものが採用される
         case
-            when lifetime_value >= 300 then 'VIP'
-            when lifetime_value >= 100 then '優良顧客'
+            when lifetime_value >= 1000 then 'VIP'
+            when lifetime_value >= 400 then '優良顧客'
             when number_of_orders = 0 then '未購入'
             else '新規・一般'
         end as customer_segment

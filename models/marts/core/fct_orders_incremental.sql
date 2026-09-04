@@ -13,9 +13,9 @@
 {{
     config(
         materialized='table'
-        -- 本番環境ではこちらに切り替える: materialized='incremental', unique_key='order_id'
     )
 }}
+-- 本番環境ではこちらに切り替える: materialized='incremental', unique_key='order_id'
 
 select
     order_id,
